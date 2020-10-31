@@ -1,0 +1,37 @@
+@import "src/_variables";
+
+.todo-list, .todo-list__wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-list {
+  margin-top: 20px;
+}
+
+.todo-list__wrapper {
+  background-color: #ffffff;
+  width: 100%;
+  margin-right: 20px;
+  font-size: 20px;
+  padding: 0 10px;
+  min-height: $todo-list-height;
+  cursor: pointer;
+  &:hover {
+    outline: 3px solid #4e95ff;
+  }
+}
+
+.todo-list__delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  width: $todo-list-height;
+  min-height: $todo-list-height;
+  cursor: pointer;
+  &:hover {
+    outline: 3px solid #fd6464;
+  }
+}

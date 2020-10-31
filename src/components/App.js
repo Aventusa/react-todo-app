@@ -1,10 +1,13 @@
 import React from 'react'
+
 import './App.scss';
+import Dashboard from './dashboard/Dashboard';
+
 
 function App() {
     return (
-        <div className="App">
-
+        <div className="app">
+           <Dashboard />
         </div>
     );
 }
