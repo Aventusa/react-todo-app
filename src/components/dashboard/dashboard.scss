@@ -1,0 +1,33 @@
+@import "src/_variables.scss";
+
+.dashboard {
+  width: 100%;
+  max-width: $app-width;
+  background-color: #0000006b;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.add-todo-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  border-radius: 100px;
+  font-size: 70px;
+  cursor: pointer;
+  transition: .2s ease;
+  background-color: #ffffff;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.no-todolist-info {
+  font-size: 20px;
+  color: #ffffff;
+  line-height: 50px;
+  text-align: center;
+}
