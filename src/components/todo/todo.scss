@@ -1,0 +1,24 @@
+@import "src/_variables";
+
+.todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.todo__wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: $todo-list-height;
+  background-color: #ffffff;
+}
+
+.todo__text {
+  padding-left: 20px;
+
+  &.done {
+    text-decoration: line-through;
+  }
+}

@@ -1,14 +1,10 @@
 @import "src/_variables.scss";
 
 .dashboard {
-  width: 100%;
-  max-width: $app-width;
-  background-color: #0000006b;
-  padding: 20px;
-  border-radius: 10px;
+  padding: $app-padding;
 }
 
-.add-todo-list {
+.add-new-list {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +21,7 @@
   }
 }
 
-.no-todolist-info {
+.no-list-info {
   font-size: 20px;
   color: #ffffff;
   line-height: 50px;
