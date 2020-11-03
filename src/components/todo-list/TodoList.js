@@ -50,7 +50,9 @@ function TodoList() {
     return (
         <div className='todo-list'>
             <div className="todo-list__nav-top">
-                <div className="todo-list__list-name" contentEditable={true}>
+                <div className="todo-list__list-name"
+                     suppressContentEditableWarning="true"
+                     contentEditable={true}>
                     Мой список
                 </div>
                 <div className="todo-list__remove-list">
