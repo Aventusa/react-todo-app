@@ -3,6 +3,7 @@ import './todo-list.scss'
 import addIcon from 'img/add-24px.svg'
 import Button from '../button/Button';
 import Todo from '../todo/Todo';
+import {Link} from 'react-router-dom';
 
 
 function TodoList() {
@@ -88,9 +89,9 @@ function TodoList() {
             })}
 
             <div className="todo-list__nav">
-                <div className="todo-list__back-btn">
+                <Link className="todo-list__back-btn" to='/dashboard'>
                     Назад
-                </div>
+                </Link>
                 {todos.length ?
                     <div className="todo-list__clear-list" onClick={clearTodoList}>
                         Очистить список

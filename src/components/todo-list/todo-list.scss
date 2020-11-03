@@ -38,6 +38,12 @@
   margin-top: 40px;
   cursor: pointer;
   color: #ffffff;
+
+  .todo-list__back-btn {
+    color: white;
+    text-decoration: none;
+  }
+
   .todo-list__back-btn:hover {
     transition: .2s ease;
     color: #4e95ff;
