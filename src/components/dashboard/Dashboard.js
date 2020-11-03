@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import List from '../list/List';
 import getFullDate from '../../utils';
 
-
 function Dashboard() {
     // eslint-disable-next-line
     const [todoLists, setTodoLists] = useState([
@@ -32,12 +31,11 @@ function Dashboard() {
             {
                 todoLists.map(list => {
                     return (
-
-                        <List
-                            todoList={list}
-                            removeList={removeList}
-                            key={list.id}
-                        />
+                            <List
+                                todoList={list}
+                                removeList={removeList}
+                                key={list.id}
+                            />
                     )
                 })
             }
