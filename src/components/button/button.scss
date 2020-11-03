@@ -1,0 +1,14 @@
+@import 'src/_variables';
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  min-width: $todo-list-height;
+  min-height: $todo-list-height;
+  cursor: pointer;
+  &:hover {
+    outline: 3px solid #fd6464;
+  }
+}
