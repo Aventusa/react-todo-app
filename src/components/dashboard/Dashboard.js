@@ -2,14 +2,14 @@ import React, {useState} from 'react'
 import './dashboard.scss'
 import PropTypes from 'prop-types'
 import List from '../list/List';
-import getFullDate from '../../utils';
+// import getFullDate from '../../utils';
+import {Link} from 'react-router-dom';
 
 function Dashboard() {
-    // eslint-disable-next-line
+
     const [todoLists, setTodoLists] = useState([
-        {id: 1, name: 'Мой список дел на выходные', date: getFullDate()},
-        {id: 2, name: 'Мой список дел после работы', date: getFullDate()},
-        {id: 3, name: 'Мой список задач', date: getFullDate()},
+        // {id: 1, name: 'Мой список дел на выходные', date: getFullDate()},
+
     ])
 
     function removeList(id) {
@@ -20,7 +20,13 @@ function Dashboard() {
 
     return (
         <div className='dashboard'>
-            <div className="add-new-list">+</div>
+            <Link
+                to={{
+                    pathname: '/todo-list'
+                }}
+                className="add-new-list"
+
+            >+</Link>
 
             {todoLists.length ? null
                 : <div
@@ -31,11 +37,11 @@ function Dashboard() {
             {
                 todoLists.map(list => {
                     return (
-                            <List
-                                todoList={list}
-                                removeList={removeList}
-                                key={list.id}
-                            />
+                        <List
+                            todoList={list}
+                            removeList={removeList}
+                            key={list.id}
+                        />
                     )
                 })
             }

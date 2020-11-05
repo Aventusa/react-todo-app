@@ -4,15 +4,14 @@ import addIcon from 'img/add-24px.svg'
 import Button from '../button/Button';
 import Todo from '../todo/Todo';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 
 function TodoList() {
 
     const [todos, setTodos] = useState([
-        {id: 1, completed: false, text: 'Сделать уроки'},
-        {id: 2, completed: false, text: 'Удалить все игры'},
-        {id: 3, completed: false, text: 'Завести твич аккаунт'},
-        {id: 4, completed: false, text: 'Погулять'},
+        // {id: 1, completed: false, text: 'Сделать уроки'},
+
     ]);
 
     const [inputValue, setInputValue] = useState('')
@@ -54,7 +53,7 @@ function TodoList() {
                 <div className="todo-list__list-name"
                      suppressContentEditableWarning="true"
                      contentEditable={true}>
-                    Мой список
+                    Мой список дел
                 </div>
                 <div className="todo-list__remove-list">
                     Удалить список
@@ -64,6 +63,7 @@ function TodoList() {
                 <input
                     ref={inputRef}
                     type="text"
+                    maxLength={50}
                     className="add-wrapper__input"
                     onInput={changeInputValue}
                     placeholder='Введите задачу...'
@@ -102,4 +102,9 @@ function TodoList() {
     )
 }
 
+TodoList.propTypes = {
+    location: PropTypes.object.isRequired
+}
+
 export default TodoList
+
