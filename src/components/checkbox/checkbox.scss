@@ -4,10 +4,14 @@
   align-items: center;
   min-width: 40px;
   height: 100%;
-  outline: 3px solid #3baf30;
+  outline: 3px solid  #292d3d;
   cursor: pointer;
 
   &.checked {
     outline: 3px solid #7411a1;
   }
+}
+
+.checked-icon {
+  max-width: 24px;
 }

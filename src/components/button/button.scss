@@ -8,7 +8,9 @@
   min-width: $todo-list-height;
   min-height: $todo-list-height;
   cursor: pointer;
-  &:hover {
-    outline: 3px solid #fd6464;
-  }
+  outline: 3px solid #292d3d !important;
+}
+
+.button__icon {
+  max-width: 24px;
 }

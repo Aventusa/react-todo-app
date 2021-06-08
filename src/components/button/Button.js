@@ -8,7 +8,7 @@ function Button(props) {
             className={props.className + ' button'}
             onClick={props.onClick}
         >
-            <img src={props.iconSrc} alt=""/>
+            <img src={props.iconSrc} alt="" className='button__icon'/>
         </div>
     )
 }

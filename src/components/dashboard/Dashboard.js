@@ -1,44 +1,55 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './dashboard.scss'
 import PropTypes from 'prop-types'
 import List from '../list/List';
-// import getFullDate from '../../utils';
+import getFullDate, {getLocalStorageItem, concatLocalStorageItem} from '../../utils';
 import {Link} from 'react-router-dom';
 
 function Dashboard() {
-
-    const [todoLists, setTodoLists] = useState([
-        // {id: 1, name: 'Мой список дел на выходные', date: getFullDate()},
-
-    ])
+    const id = Date.now()
+    const localLists = getLocalStorageItem('lists')
+    const [lists, setLists] = useState(localLists ? localLists : [])
 
     function removeList(id) {
-        setTodoLists(
-            todoLists.filter(list => list.id !== id)
+        setLists(
+            lists.filter(list => list.id !== id)
         )
+    }
+
+    useEffect(() => {
+        localStorage.removeItem('lists')
+        concatLocalStorageItem('lists', lists)
+    }, [lists])
+
+
+    function handleClick() {
+        const data = [{id, name: 'Мой список', date: getFullDate(), todos: []}]
+        concatLocalStorageItem('lists', data)
     }
 
     return (
         <div className='dashboard'>
             <Link
                 to={{
-                    pathname: '/todo-list'
+                    pathname: `/todo-list`,
+                    search: `?id=${id}`
                 }}
+                onClick={handleClick}
                 className="add-new-list"
 
             >+</Link>
 
-            {todoLists.length ? null
+            {lists.length ? null
                 : <div
                     className='no-list-info'
                 >Создайте новый список!</div>
             }
 
             {
-                todoLists.map(list => {
+                lists.map(list => {
                     return (
                         <List
-                            todoList={list}
+                            list={list}
                             removeList={removeList}
                             key={list.id}
                         />

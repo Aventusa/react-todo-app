@@ -1,26 +1,30 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import './todo-list.scss'
-import addIcon from 'img/add-24px.svg'
+import addIcon from 'img/add-icon.svg'
 import Button from '../button/Button';
 import Todo from '../todo/Todo';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {getLocalStorageItem, getLocationId, setLocalStorageItem} from '../../utils';
 
 
 function TodoList() {
-
-    const [todos, setTodos] = useState([
-        // {id: 1, completed: false, text: 'Сделать уроки'},
-
-    ]);
+    const id = getLocationId()
+    const list = getLocalStorageItem(`lists`).filter(list => list.id === id)[0]
+    const [todos, setTodos] = useState(list.todos);
 
     const [inputValue, setInputValue] = useState('')
-
     const inputRef = useRef(null)
+
 
     function removeTodo(id) {
         setTodos(todos.filter(todo => todo.id !== id))
     }
+
+    useEffect(() => {
+        list.todos = todos
+        setLocalStorageItem('lists', id, list)
+    }, [todos])
 
     function clearTodoList() {
         setTodos([])
@@ -33,15 +37,16 @@ function TodoList() {
         )
     }
 
+    function changeListName(e) {
+        list.name = e.target.innerText || 'Мой список'
+        setLocalStorageItem('lists', id, list)
+    }
+
     function addTodo(text) {
         if (text.trim()) {
-            setTodos(todos.concat(
-                [{
-                    id: Date.now(),
-                    completed: false,
-                    text
-                }]
-            ))
+            list.todos.push({id:Date.now(), todo: text, isDone: false})
+            setLocalStorageItem('lists', id, list)
+            setTodos(list.todos)
         }
         setInputValue('') // clear input
         inputRef.current.focus()
@@ -52,11 +57,10 @@ function TodoList() {
             <div className="todo-list__nav-top">
                 <div className="todo-list__list-name"
                      suppressContentEditableWarning="true"
-                     contentEditable={true}>
-                    Мой список дел
-                </div>
-                <div className="todo-list__remove-list">
-                    Удалить список
+                     contentEditable={true}
+                     onInput={changeListName}
+                >
+                    {list.name}
                 </div>
             </div>
             <div className="todo-list__add-wrapper">
@@ -78,12 +82,11 @@ function TodoList() {
             </div>
 
             {todos.length ? null : <div className='no-todo-info'>Добавьте новую задачу!</div>}
-            {todos.map(todo => {
+            {todos.map((todo) => {
                 return (
                     <Todo
                         key={todo.id}
-                        id={todo.id}
-                        text={todo.text}
+                        todo={todo}
                         removeTodo={removeTodo}/>
                 )
             })}

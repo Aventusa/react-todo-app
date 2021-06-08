@@ -6,26 +6,26 @@ import Button from '../button/Button';
 import {Link} from 'react-router-dom';
 
 
-function List(props) {
+function List({list, removeList}) {
     return (
         <div className="list">
-            <Link className="list__wrapper" to='/todo-list'>
-                    <div className="list__name">{props.todoList.name}</div>
-                    <div className="list__date">{props.todoList.date}</div>
+            <Link className="list__wrapper" to={{
+                pathname: '/todo-list',
+                search: `?id=${list.id}`
+            }}>
+                    <div className="list__name">{list.name}</div>
+                    <div className="list__date">{list.date}</div>
             </Link>
             <Button
                 iconSrc={delIcon}
-                onClick={() => props.removeList(props.todoList.id)}
+                onClick={() => removeList(list.id)}
             />
         </div>
     )
 }
 
 List.propTypes = {
-    todoList: PropTypes.object,
-    name: PropTypes.string,
-    date: PropTypes.string,
-    id: PropTypes.number,
+    list: PropTypes.object,
     removeList: PropTypes.func,
 }
 

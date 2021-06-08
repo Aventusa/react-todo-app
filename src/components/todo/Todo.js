@@ -1,17 +1,26 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './todo.scss'
 import PropTypes from 'prop-types'
-import clearIcon from 'img/clear-24px.svg'
+import clearIcon from 'img/del-icon.svg'
 import Button from '../button/Button';
 import Checkbox from '../checkbox/Checkbox';
+import {getLocalStorageItem, getLocationId, setLocalStorageItem} from '../../utils';
 
-function Todo({id, text, removeTodo}) {
-
-    const [checked, setChecked] = useState(false)
+function Todo({todo, removeTodo}) {
+    const id = getLocationId()
+    const [checked, setChecked] = useState(todo.isDone)
 
     function toggleCheckbox() {
         setChecked(!checked)
     }
+
+    useEffect(() => {
+        const list = getLocalStorageItem(`lists`).filter(list => list.id === id)[0]
+        list.todos.map(i => {
+            return i.id === todo.id ? i.isDone = checked : null
+        })
+        setLocalStorageItem('lists', id, list)
+    }, [checked])
 
     return (
         <div className='todo'>
@@ -19,18 +28,17 @@ function Todo({id, text, removeTodo}) {
                 <Checkbox checked={checked} onToggle={toggleCheckbox}/>
                 <div
                     className={checked ? "todo__text done" : "todo__text"}
-                >{text}</div>
+                >{todo.todo}</div>
             </div>
-            <Button iconSrc={clearIcon} onClick={() => removeTodo(id)}/>
+            <Button iconSrc={clearIcon} onClick={() => removeTodo(todo.id)} className='del-btn'/>
         </div>
     )
 }
 
-
 Todo.propTypes = {
-    id: PropTypes.number,
-    text: PropTypes.string,
-    removeTodo: PropTypes.func
+    todo: PropTypes.object,
+    removeTodo: PropTypes.func,
+
 }
 
 export default Todo
